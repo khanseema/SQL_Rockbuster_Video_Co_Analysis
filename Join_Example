@@ -1,0 +1,21 @@
+# This query identifies the top 5 customers in any of the top 10 cities by revenue of Rockbuster Video
+
+SELECT A.customer_id,
+       A.first_name, 
+       A.last_name,
+       D.country,
+       C.city,
+       SUM (E.amount) AS total_amount_paid
+FROM customer A
+LEFT JOIN address B ON A.address_id = B.address_id
+LEFT JOIN city C ON B.city_id = C.city_id
+LEFT JOIN country D ON C.country_id = D.country_id
+LEFT JOIN payment E ON A.customer_id = E.customer_id
+GROUP BY A.customer_id, 
+        D.country,
+        C.city
+HAVING city IN ('Aurora', 'Acua', 'Citrus Heights', 'Iwaki', 
+				   'Ambattur', 'Shanwei', 'So Leopoldo', 
+				   'Teboksary', 'Tianjin', 'Cianjur')
+ORDER BY total_amount_paid DESC
+LIMIT 5;
