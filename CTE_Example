@@ -1,0 +1,32 @@
+# this query uses a CTE to identify the five countries that have the highest customer counts
+
+WITH top_customer_by_country AS
+
+(SELECT A.customer_id,
+		A.first_name,
+		A.last_name,
+		D.country,
+		C.city,
+	SUM (E.amount) as total_amount_paid
+FROM customer A
+LEFT JOIN address B ON A.address_id = B.address_id
+LEFT JOIN city C ON B.city_id = C.city_id
+LEFT JOIN country D ON C.country_id = D.country_id
+LEFT JOIN payment E on A.customer_id = E.customer_id
+GROUP BY A.customer_id, D.country, C.city
+HAVING city IN ('Aurora', 'Acua', 'Citrus Heights', 'Iwaki', 'Ambattur', 'Shanwei', 
+				'So Leopoldo', 'Teboksary', 'Tianjin', 'Cianjur')
+ORDER BY total_amount_paid DESC
+LIMIT 5)
+
+SELECT D.country,
+	COUNT (A.customer_id) as all_customer_count,
+	COUNT (E.customer_id) as top_customer_count
+FROM customer A
+LEFT JOIN address B ON A.address_id = B.address_id
+LEFT JOIN city C ON B.city_id = C.city_id
+LEFT JOIN country D ON C.country_id = D.country_id
+LEFT JOIN top_customer_by_country E ON A.customer_id = E.customer_id
+GROUP BY D.country
+ORDER BY all_customer_count DESC
+LIMIT 5
