@@ -5,10 +5,10 @@ Rockbuster Stealth LLC is a movie rental company that had stores around the worl
 
 The Rockbuster Stealth Management Board would like to answer the following questions:
 
-"*" Which movies contributed the most/least to revenue gain?
-"*" What was the average rental duration for all videos?
-"*" Which countries are Rockbuster customers based in?
-"*" Where are customers with a high lifetime value based?
-"*" Do sales figures vary between geographic regions?
+* Which movies contributed the most/least to revenue gain?
+* What was the average rental duration for all videos?
+* Which countries are Rockbuster customers based in?
+* Where are customers with a high lifetime value based?
+* Do sales figures vary between geographic regions?
 
 The data analyzed was provided by the course provider -- CareerFoundry. It contains information about Rockbuster's film inventory, customers, payments, and other information.
